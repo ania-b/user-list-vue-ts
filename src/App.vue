@@ -1,20 +1,23 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+    <v-app>   
+        <v-content>
+            <v-container fluid>
+                <router-view></router-view>
+            </v-container>
+        </v-content>  
+    </v-app>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import store from '@/store/index';
 
-@Component({
-  components: {
-    HelloWorld,
-  },
-})
-export default class App extends Vue {}
+@Component
+export default class App extends Vue {
+    private mounted() {
+        store.commit('initialiseStoreFromStorage');
+    }
+}
 </script>
 
 <style lang="scss">
@@ -24,6 +27,6 @@ export default class App extends Vue {}
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  padding-top: 60px;
 }
 </style>
